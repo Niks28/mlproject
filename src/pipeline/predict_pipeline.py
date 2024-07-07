@@ -4,7 +4,7 @@ from src.exception import CustomeException
 from src.utils import load_object
 
 
-class PredictPipelines():
+class PredictPipeline:
     def __init__(self):
         pass # by default empty constructor
     
@@ -12,8 +12,10 @@ class PredictPipelines():
         try:        
             model_path = 'artifact/model.pkl'
             preprocessor_path  = 'artifact/processor.pkl'
+            print("Before Loading")
             model = load_object(file_path=model_path)  # load object function only import the pkl and just load the pkl file 
             preprocessor = load_object(file_path=preprocessor_path)
+            print("After Loading")
             data_scaled = preprocessor.transform(features) # when we load the data, first we need to do is to scale the data
             preds = model.predict(data_scaled) # after tranforming the data, our model will just predict the data
             return preds # returning the predidcitons
@@ -23,7 +25,7 @@ class PredictPipelines():
 
 
 # Custom Data class will responsible for mapping all the inputs that we are giving in the html to the backend with a particular values.
-class CustomData():
+class CustomData:
     def __init__(self,
         gender: str,
         race_ethnicity: str,
